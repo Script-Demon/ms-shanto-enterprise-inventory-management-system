@@ -1,0 +1,28 @@
+# Local configuration with real DB credentials
+config/config.php
+
+# User-uploaded content
+assets/uploads/*
+!assets/uploads/.htaccess
+!assets/uploads/products/
+assets/uploads/products/*
+!assets/uploads/products/.htaccess
+!assets/uploads/.gitkeep
+!assets/uploads/products/.gitkeep
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Logs & temp
+*.log
+*.tmp
+error_log
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+.vscode/
+*.swp

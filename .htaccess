@@ -1,0 +1,86 @@
+# ============================================================================
+# MS Shanto Enterprise — main .htaccess
+# Upload this to the same folder as index.php.
+#
+# Every block is wrapped in <IfModule>, so if your host lacks a module the
+# rule is skipped instead of throwing a 500 error. Safe on any cPanel host.
+# ============================================================================
+
+
+# ---- 1. Force HTTPS --------------------------------------------------------
+# Sends every visitor to the secure https:// address. Turn your free SSL on
+# first (cPanel → SSL/TLS Status → Run AutoSSL); if you enable this before the
+# certificate exists, browsers will show a warning.
+# Delete the leading "#" on the four lines below to switch it on.
+#
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#</IfModule>
+
+
+# ---- 2. Hide files nobody should download ---------------------------------
+# The database dump, this file, notes, and editor leftovers.
+<FilesMatch "(^\.htaccess$|^\.env$|\.sql$|\.md$|\.log$|\.bak$|\.example$|~$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+
+# ---- 3. No directory listings ---------------------------------------------
+# Without this, visiting a folder with no index file lists its contents.
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+
+# ---- 4. Sensible defaults --------------------------------------------------
+<IfModule mod_headers.c>
+    # Stop the browser guessing a file is a script when it isn't.
+    Header always set X-Content-Type-Options "nosniff"
+    # Don't let another site load this app inside a hidden frame.
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Don't leak your invoice URLs to sites you link out to.
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html
+</IfModule>
+
+# UTF-8 by default, so Bangla text is never mis-decoded.
+<IfModule mod_mime.c>
+    AddDefaultCharset UTF-8
+</IfModule>
+
+
+# ---- 5. Cache the design files, never the pages ----------------------------
+# Pages show live stock and money, so they must never be cached. The CSS, JS
+# and images can be, which makes the app feel faster on a phone.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType image/png             "access plus 30 days"
+    ExpiresByType image/jpeg            "access plus 30 days"
+    ExpiresByType image/webp            "access plus 30 days"
+    ExpiresByType image/gif             "access plus 30 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.php$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+
+# ---- 6. Compression --------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json
+</IfModule>

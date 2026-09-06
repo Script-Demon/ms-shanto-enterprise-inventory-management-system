@@ -1,0 +1,54 @@
+<?php
+/* ============================================================================
+   MS Shanto Enterprise — settings file  (this app's "env" file)
+
+   HOW TO USE
+   1. Rename this file to:  config.php   (same folder, drop the ".example")
+   2. Fill in the four database lines below from cPanel → MySQL Databases.
+   3. Save. That's it — nothing else in the app needs editing.
+
+   This file holds your real database password. The .htaccess in this folder
+   already blocks the web from reading it, so never move it elsewhere and
+   never share it.
+   ========================================================================== */
+
+return [
+
+    /* ---- 1. DATABASE — the only part you MUST change --------------------
+       Copy these exactly as cPanel shows them. cPanel usually prefixes the
+       name and user with your account, e.g. "shanto_shop" and "shanto_admin". */
+
+    'db_host' => 'localhost',              // almost always 'localhost'
+    'db_name' => 'PUT_DATABASE_NAME_HERE',
+    'db_user' => 'PUT_DATABASE_USER_HERE',
+    'db_pass' => 'PUT_DATABASE_PASSWORD_HERE',
+
+
+    /* ---- 2. WHERE THE APP LIVES ----------------------------------------
+       Leave '' if it sits at your domain root  → https://yourshop.com/
+       Set  '/inventory'  if it sits in a folder → https://yourshop.com/inventory/
+       (leading slash, no trailing slash) */
+
+    'base_path' => '',
+
+
+    /* ---- 3. SHOP DETAILS ------------------------------------------------
+       These are only the starting values. Once you log in you can change all
+       of them, and upload a logo, from Settings — no need to edit this file
+       again. */
+
+    'shop_name'    => 'MS Shanto Enterprise',
+    'shop_address' => 'Your Shop Address, City',
+    'shop_phone'   => '01XXXXXXXXX',
+    'currency'     => '৳',
+
+
+    /* ---- 4. ERROR DETAIL ------------------------------------------------
+       Keep this false on your live site. False = visitors see a plain
+       "something went wrong" page and the real details go to your hosting
+       error log. True = the real error and your server path are printed on
+       screen, which is only safe while testing on your own computer. */
+
+    'debug' => false,
+
+];
