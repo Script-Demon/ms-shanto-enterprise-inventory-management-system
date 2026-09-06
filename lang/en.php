@@ -312,6 +312,19 @@ return [
     'flash_customer_not_found' => 'Customer not found.',
     'flash_invoice_not_found' => 'Invoice not found.',
 
+    // Database upgrade page (upgrade.php)
+    'upg_page_title' => 'Database Upgrade',
+    'upg_intro' => 'This checks whether your database has everything the current version of the app needs, and adds anything missing. It never deletes or changes existing data, and it is safe to run more than once.',
+    'upg_th_item' => 'Item',
+    'upg_th_status' => 'Status',
+    'upg_status_ready' => 'Ready',
+    'upg_status_missing' => 'Missing — needs upgrade',
+    'upg_step_suppliers' => 'Suppliers table',
+    'upg_run_button' => 'Run upgrade now',
+    'upg_applied' => 'Upgrade complete — %d item(s) added. The Suppliers page is ready to use.',
+    'upg_failed' => 'Upgrade could not finish at: %s. Your database was not changed by the failed step. Check your hosting error log, or import sql/upgrade-suppliers.sql from phpMyAdmin instead.',
+    'upg_all_done' => 'Your database is up to date. Nothing to do.',
+    'upg_delete_hint' => 'You can delete upgrade.php from the server now if you like — it is only needed after an update.',
     // Settings
     'nav_settings' => 'Settings',
     'set_page_title' => 'Settings',

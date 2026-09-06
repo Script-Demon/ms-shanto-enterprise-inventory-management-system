@@ -36,7 +36,18 @@ CREATE TABLE IF NOT EXISTS transport_payments (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-For the Supplier module, run this once against your live database:
+For the Supplier module you do **not** need to touch SQL. Upload the new files,
+log in, and open once:
+
+    https://yourdomain.com/upgrade.php
+
+It lists what your database is missing, adds it when you press the button, and
+says "up to date" afterwards. It only ever creates what is absent — it never
+deletes or rewrites existing data, needs a login, and is safe to open twice.
+You can delete `upgrade.php` from the server afterwards if you prefer.
+
+If you would rather do it by hand, import `sql/upgrade-suppliers.sql` in
+phpMyAdmin, or run this once against your live database:
 ```sql
 CREATE TABLE IF NOT EXISTS suppliers (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -228,5 +239,7 @@ stock/         Manual stock adjustments
 reports/       Sales report
 api/           JSON endpoints used by the invoice-creation screen
 sql/schema.sql Database schema + starter categories
+sql/upgrade-suppliers.sql  One-time upgrade for databases created before Suppliers
+upgrade.php    One-time "add what my database is missing" page (login required)
 setup.php      One-time admin account creation
 ```
