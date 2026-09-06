@@ -36,6 +36,20 @@ CREATE TABLE IF NOT EXISTS transport_payments (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
+For the Supplier module, run this once against your live database:
+```sql
+CREATE TABLE IF NOT EXISTS suppliers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  company VARCHAR(150) DEFAULT NULL,
+  phone VARCHAR(30) DEFAULT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_suppliers_name (name),
+  INDEX idx_suppliers_company (company),
+  INDEX idx_suppliers_phone (phone)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 For product images, run this once against your live database:
 ```sql
 ALTER TABLE products ADD COLUMN image VARCHAR(100) DEFAULT NULL AFTER reorder_level;
@@ -107,6 +121,9 @@ without GD the logo file is served as-is, which still works but looks best if yo
 upload a square image.
 
 ## Features
+- Suppliers — a contact book of who you buy from: name, company, phone and a
+  free-text note, with one search box that matches any of the name, company
+  or phone
 - Salary management — employees with their agreed monthly salary, individual
   salary payments (full, part or advance), per-employee totals, and month/year/
   employee filters showing how much was paid in any period
@@ -205,6 +222,7 @@ lang/          bn.php (default) and en.php translation dictionaries
 assets/        CSS and JS
 products/      Product & category CRUD
 customers/     Customer CRUD + due ledger
+suppliers/     Supplier contact book (name, company, phone, note) + search
 invoices/      Create/list/view/print invoices, record payments
 stock/         Manual stock adjustments
 reports/       Sales report

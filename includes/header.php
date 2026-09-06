@@ -17,7 +17,7 @@ if (nav_is('/products/')) {
     $__section = 'new';
 } elseif (nav_is('/invoices/')) {
     $__section = 'invoices';
-} elseif (nav_is('/customers/') || nav_is('/stock/') || nav_is('/reports/') || nav_is('/transport/')) {
+} elseif (nav_is('/customers/') || nav_is('/suppliers/') || nav_is('/stock/') || nav_is('/reports/') || nav_is('/transport/')) {
     $__section = 'more';
 }
 $__brandMark = first_char($config['shop_name'] ?? 'S');
@@ -30,6 +30,7 @@ $__navItems = [
     ['url' => 'products/categories.php', 'icon' => 'tag',     'label' => t('nav_categories'),   'match' => 'products/categories.php'],
     ['url' => 'stock/adjust.php',        'icon' => 'layers',  'label' => t('nav_adjust_stock'), 'match' => 'stock/adjust.php'],
     ['url' => 'customers/list.php',      'icon' => 'users',   'label' => t('nav_customers'),    'match' => 'customers/'],
+    ['url' => 'suppliers/list.php',      'icon' => 'store',   'label' => t('nav_suppliers'),    'match' => 'suppliers/'],
     ['url' => 'invoices/list.php',       'icon' => 'receipt', 'label' => t('nav_invoices'),     'match' => 'invoices/list.php'],
     ['url' => 'salary/index.php',        'icon' => 'wallet',  'label' => t('nav_salary'),       'match' => 'salary/'],
     ['url' => 'transport/index.php',     'icon' => 'truck',   'label' => t('nav_transport'),    'match' => 'transport/'],

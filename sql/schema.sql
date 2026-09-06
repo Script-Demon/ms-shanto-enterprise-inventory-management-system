@@ -52,6 +52,20 @@ CREATE TABLE IF NOT EXISTS customers (
   INDEX idx_customers_phone (phone)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Who you buy from. A plain contact book: no stock or money is posted against a
+-- supplier, so a row can be removed at any time without touching other records.
+CREATE TABLE IF NOT EXISTS suppliers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  company VARCHAR(150) DEFAULT NULL,
+  phone VARCHAR(30) DEFAULT NULL,
+  note VARCHAR(255) DEFAULT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_suppliers_name (name),
+  INDEX idx_suppliers_company (company),
+  INDEX idx_suppliers_phone (phone)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS invoices (
   id INT AUTO_INCREMENT PRIMARY KEY,
   invoice_no VARCHAR(30) DEFAULT NULL,
